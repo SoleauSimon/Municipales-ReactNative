@@ -17,7 +17,6 @@ class DataService {
     }
 
     getComment(commentId) {
-        console.log("commentId", commentId)
         return new Promise((resolve, reject) => {
             Comment.findOne({ id: commentId }, (err, result) => {
                 if (err) {
@@ -65,8 +64,6 @@ class DataService {
             })
         })
     }
-
-    /********************* UpdateStudent *********************/
 
     deletComment(commentId) {
         return new Promise((resolve, reject) => {

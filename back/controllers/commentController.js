@@ -3,7 +3,6 @@
 const DataService = require('../services/dataService');
 
 exports.getComments = async (req, res) => {
-    console.log("prout")
     try {
         let students = await DataService.getComments();
         res.status(200).send(students);
@@ -41,15 +40,13 @@ exports.likeComment = async (req, res) => {
 }
 
 exports.deletComment = async (req, res) => {
-    console.log("deletComment")
-
-    // const { profile_picture, first_name, last_name, description, email, password, promo, job } = req.body;
-    // try {
-    //     let student = await DataService.createStudent(profile_picture, first_name, last_name, description, email, password, promo, job);
-    //     res.status(200).send(student)
-    // } catch (error) {
-    //     res.status(500).send(error)
-    // }
+    console.log(req.body.id, "deletComment")
+    try {
+        let student = await DataService.deletComment(req.body.id);
+        res.status(200).send(student)
+    } catch (error) {
+        res.status(500).send(error)
+    }
 }
 
 exports.addComment = async (req, res) => {
