@@ -17,4 +17,4 @@ mongoose.connect("mongodb://127.0.0.1:27017/", { promiseLibrary: require('bluebi
 
 app.use('/api', commentRoutes);
 
-app.listen(9000, () => console.log('app listening port 9k'))
+app.listen(9000, () => console.log('app listening port 9000'))

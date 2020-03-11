@@ -4,51 +4,43 @@ const DataService = require('../services/dataService');
 
 exports.getComments = async (req, res) => {
     try {
-        let students = await DataService.getComments();
-        res.status(200).send(students);
+        let comments = await DataService.getComments();
+        res.status(200).send(comments);
     } catch (error) {
         res.status(500).send(error);
     }
 };
 
 exports.getComment = async (req, res) => {
-    console.log("getComment")
-
-    // if (!req.cookies || !req.cookies['x-auth-token']) {
-    //     res.status(204).send()
-    // }
+    res.send("res")
     // try {
-    //     const user = getDataFromToken(req.cookies['x-auth-token'])
-    //     let student = await DataService.getStudentById(user._id);
-    //     res.status(200).send(student);
-    // } catch (error) {
-    //     res.clearCookie('x-auth-token')
-    //     res.status(404).send(error);
-    // }
-}
-
-exports.likeComment = async (req, res) => {
-    console.log("likeComment")
-
-    // const { student_id } = req.params;
-    // try {
-    //     let student = await DataService.getStudentById(student_id);
-    //     res.status(200).send(student);
+    //     let comment = await DataService.getComment(req.body.id);
+    //     res.status(200).send(comment);
     // } catch (error) {
     //     res.status(500).send(error);
     // }
 }
 
+exports.addLikeComment = async (req, res) => {
+    try {
+        let newLike = await DataService.addLikeComment(req.body.id);
+        res.status(200).send(newLike);
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
 exports.deletComment = async (req, res) => {
     try {
-        let student = await DataService.deletComment(req.body.id);
-        res.status(200).send(student)
+        let comment = await DataService.deletComment(req.body.id);
+        res.status(200).send(comment)
     } catch (error) {
         res.status(500).send(error)
     }
 }
 
 exports.addComment = async (req, res) => {
+    console.log(req.body.body)
     try {
         let newComment = await DataService.addComment(req.body.body);
         res.status(200).send(newComment);
@@ -58,7 +50,6 @@ exports.addComment = async (req, res) => {
 }
 
 exports.updateComment = async (req, res) => {
-    console.log("update")
     try {
         let newComment = await DataService.updateComment(req.body.id, req.body.body);
         res.status(200).send(newComment);

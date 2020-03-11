@@ -17,6 +17,7 @@ class DataService {
     }
 
     getComment(commentId) {
+
         return new Promise((resolve, reject) => {
             Comment.findOne({ id: commentId }, (err, result) => {
                 if (err) {
@@ -28,27 +29,16 @@ class DataService {
         })
     }
 
-    likeComment() {
-        return "OkLike"
-        // return new Promise((resolve, reject) => {
-        //     Comment.find({}, (err, students) => {
-        //         if (err) {
-        //             reject(err)
-        //         } else {
-        //             resolve(students.map(student => ({
-        //                 _id: student._id,
-        //                 first_name: student.first_name,
-        //                 last_name: student.last_name,
-        //                 profile_picture: student.profile_picture,
-        //                 description: student.description,
-        //                 email: student.email,
-        //                 promo: student.promo,
-        //                 job: student.job,
-        //                 notes: student.notes
-        //             })))
-        //         }
-        //     });
-        // })
+    addLikeComment(commentId) {
+        return new Promise((resolve, reject) => {
+            Comment.findByIdAndUpdate(commentId, { $inc: { likes: 1 } }, { new: true }, (err, comment) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(comment)
+                }
+            });
+        })
     }
 
     addComment(body) {
@@ -78,10 +68,8 @@ class DataService {
     }
 
     updateComment(commentId, body) {
-        console.log(commentId)
-        console.log(body)
         return new Promise((resolve, reject) => {
-            Comment.findByIdAndUpdate(commentId, { body, likes: 10 }, { new: true }, (err, comment) => {
+            Comment.findByIdAndUpdate(commentId, { body, likes: 0 }, { new: true }, (err, comment) => {
                 if (err) {
                     reject(err)
                 } else {

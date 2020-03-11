@@ -19,8 +19,8 @@ router.route('/comments')
     .get(commentController.getComments)
     .post(commentController.addComment);
 
-router.route('/like/:commentId')
-    .post(commentController.likeComment)
+router.route('/like')
+    .post(commentController.addLikeComment)
 // .delete(commentController.deletComment);
 
 module.exports = router;
