@@ -17,9 +17,8 @@ class DataService {
     }
 
     getComment(commentId) {
-
         return new Promise((resolve, reject) => {
-            Comment.findOne({ id: commentId }, (err, result) => {
+            Comment.findById(commentId, (err, result) => {
                 if (err) {
                     reject(err)
                 } else {

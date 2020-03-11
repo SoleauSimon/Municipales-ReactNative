@@ -12,13 +12,12 @@ exports.getComments = async (req, res) => {
 };
 
 exports.getComment = async (req, res) => {
-    res.send("res")
-    // try {
-    //     let comment = await DataService.getComment(req.body.id);
-    //     res.status(200).send(comment);
-    // } catch (error) {
-    //     res.status(500).send(error);
-    // }
+    try {
+        let comment = await DataService.getComment(req.body.id);
+        res.status(200).send(comment);
+    } catch (error) {
+        res.status(500).send(error);
+    }
 }
 
 exports.addLikeComment = async (req, res) => {
