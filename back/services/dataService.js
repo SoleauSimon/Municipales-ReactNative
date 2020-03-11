@@ -77,17 +77,18 @@ class DataService {
         })
     }
 
-    updateStudentNote() {
-        return "OkUpdate"
-        // return new Promise((resolve, reject) => {
-        //     Comment.findByIdAndUpdate(student_id, changes, { new: true }, (err, student) => {
-        //         if (err) {
-        //             reject(err)
-        //         } else {
-        //             resolve(student)
-        //         }
-        //     });
-        // })
+    updateComment(commentId, body) {
+        console.log(commentId)
+        console.log(body)
+        return new Promise((resolve, reject) => {
+            Comment.findByIdAndUpdate(commentId, { body, likes: 10 }, { new: true }, (err, comment) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(comment)
+                }
+            });
+        })
     }
 }
 

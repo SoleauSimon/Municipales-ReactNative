@@ -40,7 +40,6 @@ exports.likeComment = async (req, res) => {
 }
 
 exports.deletComment = async (req, res) => {
-    console.log(req.body.id, "deletComment")
     try {
         let student = await DataService.deletComment(req.body.id);
         res.status(200).send(student)
@@ -52,6 +51,16 @@ exports.deletComment = async (req, res) => {
 exports.addComment = async (req, res) => {
     try {
         let newComment = await DataService.addComment(req.body.body);
+        res.status(200).send(newComment);
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
+exports.updateComment = async (req, res) => {
+    console.log("update")
+    try {
+        let newComment = await DataService.updateComment(req.body.id, req.body.body);
         res.status(200).send(newComment);
     } catch (error) {
         res.status(500).send(error)
