@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Button } from 'react-native'
 
 const Card = ({ id, text, likes, date }) => {
     return (
@@ -22,6 +22,18 @@ const Card = ({ id, text, likes, date }) => {
                 <Text style={styles.cardLike}>
                     {likes}
                 </Text>
+                <View>
+                    <Button
+                        title="Pour"
+                        color="#4D7EA8"
+                        onPress={() => console.warn('Pour Button pressed')}
+                    />
+                    <Button
+                        title="Contre"
+                        color="#E85F5C"
+                        onPress={() => console.warn('Contre Button pressed')}
+                    />
+                </View>
             </View>
         </View>
     )
@@ -33,13 +45,11 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         borderStyle: "solid",
         borderWidth: 1,
-        borderColor: "red",
-        borderRadius: 6
+        borderColor: "#593E56",
+        borderRadius: 4
     },
     cardContent: {
         padding: 10,
-        flex: 1,
-        backgroundColor: "red"
     },
     cardHeader: {
         display: "flex",
@@ -51,7 +61,7 @@ const styles = StyleSheet.create({
         marginRight: 20,
         width: 50,
         height: 50,
-        backgroundColor: "red",
+        backgroundColor: "#593E56",
         borderRadius: 25
     },
     cardName: {
@@ -63,17 +73,22 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: "300",
     },
-    cardContent: {
-
-    },
     cardText: {
-        fontSize: 20,
+        marginTop: 15,
+        fontSize: 16,
+        lineHeight: 21
     },
     cardLikeContent: {
-
+        paddingVertical: 10,
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        borderTopWidth: 1,
+        borderTopColor: "#593E56"
     },
     cardLike: {
-        
+        display: "none"
     }
 })
 

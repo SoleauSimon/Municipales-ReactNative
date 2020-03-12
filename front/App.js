@@ -19,8 +19,8 @@ export default function App() {
             placeholder="Poster un commentaire"
         />
         {
-          comments ?
-            <FlatList
+          comments 
+           && <FlatList
               data={comments}
               renderItem={({ item }) => (
                 <Card
@@ -30,9 +30,8 @@ export default function App() {
                   date={item.createdAt}
                 />
                 )}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item._id}
             />
-          : null
         }
       </View>
     </SafeAreaView>
