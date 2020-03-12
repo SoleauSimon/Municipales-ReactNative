@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 28107,
-  "expoServerNgrokUrl": "https://nq-dij.anonymous.front.exp.direct",
-  "packagerNgrokUrl": "https://packager.nq-dij.anonymous.front.exp.direct",
-  "ngrokPid": 28120
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
