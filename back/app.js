@@ -1,20 +1,18 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser')
 const cors = require('cors');
 const mongoose = require('mongoose');
 
 const commentRoutes = require('./routes/commentRoutes');
 
-app.use(cors({ origin: process.env.FRONT_URL || 'http://localhost:3000' }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+mongoose.connect("mongodb://localhost/municipaldb", { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
+mongoose.Pormise = global.Promise
 
-mongoose.Promise = require('bluebird');
-mongoose.set('debug', true);
-mongoose.connect("mongodb://127.0.0.1:27017/", { promiseLibrary: require('bluebird') })
-    .then(_ => console.log('connection succesfull'))
-    .catch(error => console.log(error));
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
+app.use(cors());
 app.use('/api', commentRoutes);
 
 app.listen(9000, () => console.log('app listening port 9000'))

@@ -2,21 +2,27 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, SafeAreaView, FlatList, TextInput, View } from 'react-native'
 import Card from './components/card'
 
+GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+
 export default function App() {
   const [comments, setComments] = useState(null)
 
-  useEffect(() => {
-    fetch('http://localhost:9000/api/comments')
+  try {
+    fetch('http://10.93.183.177:9000/api/comments')
       .then(res => res.json())
       .then(res => setComments(res))
-  })
-    
+
+  } catch (error) {
+    console.log(error)
+  }
+
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <TextInput
-            style={styles.input}
-            placeholder="Poster un commentaire"
+          style={styles.input}
+          placeholder="Poster un commentaire"
         />
         {
           comments 
@@ -24,7 +30,7 @@ export default function App() {
               data={comments}
               renderItem={({ item }) => (
                 <Card
-                  id={item._id} 
+                  id={item._id}
                   text={item.body}
                   likes={item.likes}
                   date={item.createdAt}
