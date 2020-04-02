@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, SafeAreaView, FlatList, TextInput, View } from 'react-native'
+import React, { useState, useEffect, createRef } from 'react'
+import { StyleSheet, SafeAreaView, FlatList, TextInput, ScrollView } from 'react-native'
 import Card from './components/card'
 
 GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
@@ -7,22 +7,46 @@ GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
 export default function App() {
   const [comments, setComments] = useState(null)
 
-  try {
-    fetch('http://10.93.183.177:9000/api/comments')
+  const inputRef = createRef()
+
+  const addComment = (e) => {
+    let text = e.nativeEvent.text
+    console.warn(text)
+    text.length > 0 ?
+      fetch('http://localhost:9000/api/comments', {
+        method: 'post',
+        body: JSON.stringify({
+          body: text
+        })
+      })
       .then(res => res.json())
       .then(res => setComments(res))
-
-  } catch (error) {
-    console.log(error)
+    : null
   }
 
+  // useEffect(() => {
+  //   fetch('http://10.93.183.177:9000/api/comments')
+  //   .then(res => res.json())
+  //   .then(res => setComments(res))
+  // })
+
+  useEffect(() => {
+    fetch('http://localhost:9000/api/comments')
+      .then(res => res.json())
+      .then(res => setComments(res))
+  })
 
   return (
     <SafeAreaView>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <TextInput
-          style={styles.input}
           placeholder="Poster un commentaire"
+          style={styles.input}
+          onSubmitEditing={(e) => {
+              addComment(e)
+              inputRef.current.clear()
+          }}
+          ref={inputRef}
         />
         {
           comments 
@@ -39,7 +63,7 @@ export default function App() {
                 keyExtractor={item => item._id}
             />
         }
-      </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
